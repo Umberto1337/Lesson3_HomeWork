@@ -18,7 +18,8 @@ public class Program {
             // Генерация почасовой ставки
             double hourlyRate = 500 + random.nextDouble() * (1000 - 500);
             // Создать случайного Freelancer
-            return new Freelancer(names[random.nextInt(names.length)], surNames[random.nextInt(surNames.length)], hourlyRate, age);
+            return new Freelancer(names[random.nextInt(names.length)], surNames[random.nextInt(surNames.length)], hourlyRate, age); 
+            // Если добавить рандомный способ вывода часов затраченных за месяц у фрилансеров, то тогда получится выводить среднемесячную зарплату а не по часовую. 
         } else {
             // Создать случайного Worker
             return new Worker(names[random.nextInt(names.length)], surNames[random.nextInt(surNames.length)], 100 * salaryIndex, age);
@@ -41,7 +42,7 @@ public class Program {
             System.out.println(employee);
         }
 
-
+        // Компаратор по возрасту
         Arrays.sort(employees, new AgeComparator());
 
         System.out.println();
@@ -50,7 +51,7 @@ public class Program {
             System.out.println(employee);
         }
 
-
+        // Компаратор по заработной плате
         Arrays.sort(employees, new SalaryComparator());
 
         System.out.println();

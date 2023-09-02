@@ -6,38 +6,57 @@ public class Program {
     private static Random random = new Random();
 
 
-    public static Worker generateWorker(){
+    public static Employee generateEmployee(){
         String[] names = new String[] { "Анатолий", "Глеб", "Клим", "Мартин", "Лазарь", "Владлен", "Клим", "Панкратий", "Рубен", "Герман" };
         String[] surNames = new String[] { "Григорьев", "Фокин", "Шестаков", "Хохлов", "Шубин", "Бирюков", "Копылов", "Горбунов", "Лыткин", "Соколов" };
 
         int salaryIndex = random.nextInt(200, 500);
+        int age = random.nextInt(18, 60);// Генерация случайного возраста
+        boolean isFreelancer = random.nextBoolean();
 
-        return new Worker(names[random.nextInt(names.length)], surNames[random.nextInt(surNames.length)], 100 * salaryIndex);
+        if (isFreelancer) {
+            // Генерация почасовой ставки
+            double hourlyRate = 500 + random.nextDouble() * (1000 - 500);
+            // Создать случайного Freelancer
+            return new Freelancer(names[random.nextInt(names.length)], surNames[random.nextInt(surNames.length)], hourlyRate, age);
+        } else {
+            // Создать случайного Worker
+            return new Worker(names[random.nextInt(names.length)], surNames[random.nextInt(surNames.length)], 100 * salaryIndex, age);
+        }
     }
 
-    public static Worker[] generateWorkers(int count){
-        Worker[] workers = new Worker[count];
+    public static Employee[] generateEmployees(int count){
+        Employee[] employees = new Employee[count];
         for (int i = 0; i < count; i++){
-            workers[i] = generateWorker();
+            employees[i] = generateEmployee();
         }
-        return workers;
+        return employees;
     }
 
     public static void main(String[] args) {
 
-        Worker[] workers = generateWorkers(12);
-
-        for (Worker worker: workers) {
-            System.out.println(worker);
+        Employee[] employees = generateEmployees(10);
+        System.out.println("Исходный список сотрудников:");
+        for (Employee employee: employees) {
+            System.out.println(employee);
         }
 
 
-        Arrays.sort(workers/*, new SalaryComparator()*/);
+        Arrays.sort(employees, new AgeComparator());
 
         System.out.println();
+        System.out.println("\nСписок сотрудников после сортировки по возрасту:");
+        for (Employee employee: employees) {
+            System.out.println(employee);
+        }
 
-        for (Worker worker: workers) {
-            System.out.println(worker);
+
+        Arrays.sort(employees, new SalaryComparator());
+
+        System.out.println();
+        System.out.println("\nСписок сотрудников после сортировки по заработной плате:");
+        for (Employee employee: employees) {
+            System.out.println(employee);
         }
 
     }

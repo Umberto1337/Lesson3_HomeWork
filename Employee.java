@@ -16,16 +16,30 @@ public abstract class Employee implements Comparable<Employee> {
     protected double salary;
 
     /**
+     * Возраст
+     */
+    protected int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
      * Расчет среднемесячной заработной платы
      * @return
      */
     public abstract double calculateSalary();
 
 
-    public Employee(String name, String surName, double salary) {
+    public Employee(String name, String surName, double salary, int age) {
         this.name = name;
         this.surName = surName;
         this.salary = salary;
+        this.age = age;
     }
 
     @Override
